@@ -484,18 +484,6 @@ static NSString *suggestedNameWithExtension(NSString *ext)
     return [base stringByAppendingPathExtension:ext];
 }
 
-static void showWriteFailureAlert(NSString *path, NSError *err)
-{
-    NSAlert *alert = [[NSAlert alloc] init];
-    alert.messageText = @"Export failed";
-    alert.informativeText =
-        [NSString stringWithFormat:@"Could not write %@: %@",
-         path, err.localizedDescription ?: @"unknown error"];
-    alert.alertStyle = NSAlertStyleWarning;
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-}
-
 // ── Export to file commands ─────────────────────────────────────────────
 
 static void doExportRTF()
@@ -508,10 +496,7 @@ static void doExportRTF()
 
         std::string rtf = generateRTF();
         NSData *data = [NSData dataWithBytes:rtf.c_str() length:rtf.size()];
-        NSError *err = nil;
-        if (![data writeToFile:path options:NSDataWritingAtomic error:&err]) {
-            showWriteFailureAlert(path, err);
-        }
+        [data writeToFile:path options:NSDataWritingAtomic error:nil];
     }
 }
 
@@ -525,10 +510,7 @@ static void doExportHTML()
 
         std::string html = generateHTML();
         NSData *data = [NSData dataWithBytes:html.c_str() length:html.size()];
-        NSError *err = nil;
-        if (![data writeToFile:path options:NSDataWritingAtomic error:&err]) {
-            showWriteFailureAlert(path, err);
-        }
+        [data writeToFile:path options:NSDataWritingAtomic error:nil];
     }
 }
 
