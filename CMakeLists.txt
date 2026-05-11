@@ -20,5 +20,5 @@ target_link_libraries(NPP_ExportPlugin PRIVATE
     "-framework Cocoa"
     "-framework UniformTypeIdentifiers")
 set_target_properties(NPP_ExportPlugin PROPERTIES PREFIX "" SUFFIX ".dylib")
-set(PLUGIN_INSTALL_DIR "$ENV{HOME}/.notepad++/plugins/NPP_ExportPlugin")
+set(PLUGIN_INSTALL_DIR "$ENV{HOME}/.nextpad++/plugins/NPP_ExportPlugin")
 install(TARGETS NPP_ExportPlugin DESTINATION "${PLUGIN_INSTALL_DIR}")
